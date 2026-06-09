@@ -116,7 +116,7 @@
       background: #1a2e1e;
       border: 1px solid #2e5234;
       border-radius: 8px;
-      padding: 0.65rem 2.5rem 0.65rem 2.4rem;
+      padding: 0.65rem 4.6rem 0.65rem 2.4rem;
       color: #e8f5e9;
       font-size: 0.95rem;
       outline: none;
@@ -156,6 +156,23 @@
     }
 
     .search-clear:hover { color: #ef9a9a; }
+
+    .search-random {
+      position: absolute;
+      right: 2.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: #4a7050;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      padding: 0.2rem;
+      transition: color 0.15s, transform 0.15s;
+    }
+
+    .search-random:hover { color: #4caf50; transform: translateY(-50%) rotate(20deg); }
 
     mark {
       background: rgba(76, 175, 80, 0.3);
@@ -420,6 +437,16 @@
         </svg>
       </span>
       <input type="search" id="search-input" placeholder="Rechercher un favori…" autocomplete="off" />
+      <button class="search-random" id="search-random" title="Favori aléatoire">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="8" cy="8" r="1.5" fill="currentColor"/>
+          <circle cx="16" cy="8" r="1.5" fill="currentColor"/>
+          <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+          <circle cx="8" cy="16" r="1.5" fill="currentColor"/>
+          <circle cx="16" cy="16" r="1.5" fill="currentColor"/>
+        </svg>
+      </button>
       <button class="search-clear" id="search-clear" title="Effacer">✕</button>
     </div>
 
@@ -599,6 +626,13 @@
       searchClear.style.display = 'none';
       searchInput.focus();
       renderList(load());
+    });
+
+    document.getElementById('search-random').addEventListener('click', () => {
+      const all = load();
+      if (!all.length) return;
+      const pick = all[Math.floor(Math.random() * all.length)];
+      window.open(pick.url, '_blank', 'noopener');
     });
 
     renderList(load());
