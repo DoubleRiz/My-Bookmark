@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestionnaire de Favoris</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f1f13;
+      color: #e8f5e9;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #4caf50;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      color: #66bb6a;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Form */
+    .form-card {
+      background: #1a2e1e;
+      border: 1px solid #2e5234;
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #81c784;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .form-row input {
+      background: #0f1f13;
+      border: 1px solid #2e5234;
+      border-radius: 8px;
+      padding: 0.65rem 0.9rem;
+      color: #e8f5e9;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-row input::placeholder { color: #4a7050; }
+
+    .form-row input:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+    }
+
+    .btn-add {
+      background: #4caf50;
+      color: #0f1f13;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      align-self: flex-end;
+      min-width: 120px;
+    }
+
+    .btn-add:hover { background: #66bb6a; }
+    .btn-add:active { transform: scale(0.97); }
+
+    .error-msg {
+      color: #ef9a9a;
+      font-size: 0.82rem;
+      margin-top: 0.25rem;
+      min-height: 1.1em;
+    }
+
+    /* Search bar */
+    .search-bar {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .search-bar input {
+      width: 100%;
+      background: #1a2e1e;
+      border: 1px solid #2e5234;
+      border-radius: 8px;
+      padding: 0.65rem 2.5rem 0.65rem 2.4rem;
+      color: #e8f5e9;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-bar input::placeholder { color: #4a7050; }
+
+    .search-bar input:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #4a7050;
+      pointer-events: none;
+      font-size: 0.95rem;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 0.6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: #4a7050;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      padding: 0.2rem;
+      display: none;
+    }
+
+    .search-clear:hover { color: #ef9a9a; }
+
+    mark {
+      background: rgba(76, 175, 80, 0.3);
+      color: #e8f5e9;
+      border-radius: 2px;
+      padding: 0 1px;
+    }
+
+    /* Counter bar */
+    .counter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .counter-bar h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #81c784;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge {
+      background: #2e5234;
+      color: #a5d6a7;
+      border-radius: 999px;
+      padding: 0.2rem 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    /* Bookmarks list */
+    .bookmarks-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .bookmark-item {
+      background: #1a2e1e;
+      border: 1px solid #2e5234;
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: border-color 0.2s, transform 0.15s;
+      animation: slideIn 0.2s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .bookmark-item:hover {
+      border-color: #4caf50;
+      transform: translateX(3px);
+    }
+
+    .favicon {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      background: #2e5234;
+    }
+
+    .bookmark-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .bookmark-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #e8f5e9;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .bookmark-url {
+      font-size: 0.78rem;
+      color: #4caf50;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-decoration: none;
+    }
+
+    .bookmark-url:hover { text-decoration: underline; }
+
+    .btn-delete {
+      background: transparent;
+      border: 1px solid #2e5234;
+      color: #ef9a9a;
+      border-radius: 6px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-delete:hover {
+      background: rgba(239, 154, 154, 0.1);
+      border-color: #ef9a9a;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #4a7050;
+    }
+
+    .empty-state .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .empty-state p { font-size: 0.9rem; }
+
+    /* Contact form */
+    .contact-section {
+      margin-top: 3rem;
+      border-top: 1px solid #2e5234;
+      padding-top: 2rem;
+    }
+
+    .contact-section h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #81c784;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1rem;
+    }
+
+    .contact-form {
+      background: #1a2e1e;
+      border: 1px solid #2e5234;
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .field-inline {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .field-inline input {
+      flex: 1;
+    }
+
+    .field-error {
+      font-size: 0.8rem;
+      color: #ef9a9a;
+      min-height: 1em;
+      padding-left: 0.1rem;
+    }
+
+    .contact-form input.invalid,
+    .contact-form textarea.invalid {
+      border-color: #ef9a9a;
+      box-shadow: 0 0 0 3px rgba(239, 154, 154, 0.12);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      background: #0f1f13;
+      border: 1px solid #2e5234;
+      border-radius: 8px;
+      padding: 0.65rem 0.9rem;
+      color: #e8f5e9;
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: #4a7050; }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .contact-form .btn-send {
+      background: #4caf50;
+      color: #0f1f13;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      align-self: flex-end;
+      min-width: 130px;
+    }
+
+    .contact-form .btn-send:hover { background: #66bb6a; }
+    .contact-form .btn-send:active { transform: scale(0.97); }
+
+    .contact-success {
+      display: none;
+      text-align: center;
+      padding: 1.5rem;
+      color: #81c784;
+      font-size: 0.95rem;
+    }
+
+    .contact-success .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+
+    footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      color: #2e5234;
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Favoris</h1>
+      <p>Vos liens sauvegardés localement</p>
+    </header>
+
+    <div class="form-card">
+      <h2>Ajouter un favori</h2>
+      <div class="form-row">
+        <input type="text" id="input-title" placeholder="Titre du site" autocomplete="off" />
+        <input type="url" id="input-url" placeholder="https://exemple.com" autocomplete="off" />
+        <span class="error-msg" id="error-msg"></span>
+        <button class="btn-add" id="btn-add">+ Ajouter</button>
+      </div>
+    </div>
+
+    <div class="search-bar">
+      <span class="search-icon">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="6.5" cy="6.5" r="5" stroke="#4a7050" stroke-width="1.5"/>
+          <line x1="10.5" y1="10.5" x2="14" y2="14" stroke="#4a7050" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <input type="search" id="search-input" placeholder="Rechercher un favori…" autocomplete="off" />
+      <button class="search-clear" id="search-clear" title="Effacer">✕</button>
+    </div>
+
+    <div class="counter-bar">
+      <h2>Mes favoris</h2>
+      <span class="badge" id="counter">0 lien</span>
+    </div>
+
+    <div class="bookmarks-list" id="bookmarks-list"></div>
+
+    <div class="contact-section">
+      <h2>Nous contacter</h2>
+      <form class="contact-form" id="contact-form" novalidate>
+        <div class="field-group">
+          <div class="field-inline">
+            <input type="text" id="contact-name" placeholder="Votre nom" autocomplete="name" />
+          </div>
+          <span class="field-error" id="error-name"></span>
+        </div>
+        <div class="field-group">
+          <div class="field-inline">
+            <input type="email" id="contact-email" placeholder="Votre adresse e-mail" autocomplete="email" />
+          </div>
+          <span class="field-error" id="error-email"></span>
+        </div>
+        <textarea id="contact-message" placeholder="Votre message…"></textarea>
+        <button type="submit" class="btn-send">Envoyer</button>
+      </form>
+      <div class="contact-success" id="contact-success">
+        <div class="icon">✅</div>
+        <p>Merci ! Votre message a bien été envoyé.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>© 2026 Gestionnaire de Favoris</footer>
+
+  <script>
+    const STORAGE_KEY = 'bookmarks_v1';
+
+    function load() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+      catch { return []; }
+    }
+
+    function save(bookmarks) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(bookmarks));
+    }
+
+    function faviconUrl(url) {
+      try {
+        const { origin } = new URL(url);
+        return `https://www.google.com/s2/favicons?domain=${origin}&sz=32`;
+      } catch { return ''; }
+    }
+
+    function highlight(text, query) {
+      if (!query) return escHtml(text);
+      const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return escHtml(text).replace(new RegExp(escaped, 'gi'), m => `<mark>${m}</mark>`);
+    }
+
+    function renderList(bookmarks, query = '') {
+      const list = document.getElementById('bookmarks-list');
+      const counter = document.getElementById('counter');
+      const total = bookmarks.length;
+
+      const q = query.trim().toLowerCase();
+      const filtered = q
+        ? bookmarks.filter(b => b.title.toLowerCase().includes(q) || b.url.toLowerCase().includes(q))
+        : bookmarks;
+
+      const n = filtered.length;
+      counter.textContent = q
+        ? `${n} résultat${n !== 1 ? 's' : ''} sur ${total}`
+        : `${total} lien${total !== 1 ? 's' : ''}`;
+
+      if (total === 0) {
+        list.innerHTML = `
+          <div class="empty-state">
+            <div class="icon">🔖</div>
+            <p>Aucun favori pour l'instant.<br>Ajoutez votre premier lien ci-dessus !</p>
+          </div>`;
+        return;
+      }
+
+      if (n === 0) {
+        list.innerHTML = `
+          <div class="empty-state">
+            <div class="icon">🔍</div>
+            <p>Aucun résultat pour « ${escHtml(query.trim())} ».</p>
+          </div>`;
+        return;
+      }
+
+      list.innerHTML = filtered.map((b, i) => `
+        <div class="bookmark-item" data-index="${bookmarks.indexOf(b)}">
+          <img class="favicon" src="${faviconUrl(b.url)}" alt="" onerror="this.style.display='none'" />
+          <div class="bookmark-info">
+            <div class="bookmark-title" title="${escHtml(b.title)}">${highlight(b.title, query.trim())}</div>
+            <a class="bookmark-url" href="${escHtml(b.url)}" target="_blank" rel="noopener noreferrer">${highlight(b.url, query.trim())}</a>
+          </div>
+          <button class="btn-delete" data-index="${bookmarks.indexOf(b)}" title="Supprimer">✕</button>
+        </div>`).join('');
+    }
+
+    function escHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function normalizeUrl(url) {
+      url = url.trim();
+      if (url && !/^https?:\/\//i.test(url)) url = 'https://' + url;
+      return url;
+    }
+
+    function addBookmark() {
+      const titleInput = document.getElementById('input-title');
+      const urlInput   = document.getElementById('input-url');
+      const errorMsg   = document.getElementById('error-msg');
+
+      const title = titleInput.value.trim();
+      let url = normalizeUrl(urlInput.value);
+
+      errorMsg.textContent = '';
+
+      if (!title && !url) {
+        errorMsg.textContent = 'Veuillez renseigner un titre et une URL.';
+        return;
+      }
+      if (!title) { errorMsg.textContent = 'Le titre est requis.'; return; }
+      if (!url)   { errorMsg.textContent = "L'URL est requise."; return; }
+
+      try { new URL(url); }
+      catch { errorMsg.textContent = "L'URL semble invalide."; return; }
+
+      const bookmarks = load();
+      bookmarks.unshift({ title, url, addedAt: Date.now() });
+      save(bookmarks);
+      renderList(bookmarks, document.getElementById('search-input').value);
+
+      titleInput.value = '';
+      urlInput.value   = '';
+      titleInput.focus();
+    }
+
+    document.getElementById('btn-add').addEventListener('click', addBookmark);
+
+    document.getElementById('input-url').addEventListener('keydown', e => {
+      if (e.key === 'Enter') addBookmark();
+    });
+    document.getElementById('input-title').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('input-url').focus();
+    });
+
+    document.getElementById('bookmarks-list').addEventListener('click', e => {
+      const btn = e.target.closest('.btn-delete');
+      if (!btn) return;
+      const index = parseInt(btn.dataset.index, 10);
+      const bookmarks = load();
+      bookmarks.splice(index, 1);
+      save(bookmarks);
+      renderList(bookmarks, document.getElementById('search-input').value);
+    });
+
+    const searchInput = document.getElementById('search-input');
+    const searchClear = document.getElementById('search-clear');
+
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value;
+      searchClear.style.display = q ? 'block' : 'none';
+      renderList(load(), q);
+    });
+
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      searchClear.style.display = 'none';
+      searchInput.focus();
+      renderList(load());
+    });
+
+    renderList(load());
+
+    function setFieldError(inputId, errorId, message) {
+      const input = document.getElementById(inputId);
+      const span  = document.getElementById(errorId);
+      if (message) {
+        input.classList.add('invalid');
+        span.textContent = message;
+      } else {
+        input.classList.remove('invalid');
+        span.textContent = '';
+      }
+      return !!message;
+    }
+
+    function validateContactField(inputId, errorId) {
+      const input = document.getElementById(inputId);
+      input.addEventListener('input', () => validateContactField(inputId, errorId));
+
+      const value = input.value.trim();
+      if (inputId === 'contact-name') {
+        return setFieldError(inputId, errorId, value ? '' : 'Le nom est requis.');
+      }
+      if (inputId === 'contact-email') {
+        if (!value) return setFieldError(inputId, errorId, "L'adresse e-mail est requise.");
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+          return setFieldError(inputId, errorId, "Format d'e-mail invalide.");
+        return setFieldError(inputId, errorId, '');
+      }
+      return false;
+    }
+
+    ['contact-name', 'contact-email'].forEach(id => {
+      const errorId = id === 'contact-name' ? 'error-name' : 'error-email';
+      document.getElementById(id).addEventListener('blur', () => validateContactField(id, errorId));
+      document.getElementById(id).addEventListener('input', () => {
+        if (document.getElementById(id).classList.contains('invalid'))
+          validateContactField(id, errorId);
+      });
+    });
+
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const hasErrorName  = validateContactField('contact-name',  'error-name');
+      const hasErrorEmail = validateContactField('contact-email', 'error-email');
+      if (hasErrorName || hasErrorEmail) return;
+
+      this.style.display = 'none';
+      document.getElementById('contact-success').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
