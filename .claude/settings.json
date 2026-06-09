@@ -3,7 +3,8 @@
     "allow": [
       "Skill(commit)",
       "Skill(commit:*)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }
