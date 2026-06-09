@@ -15,30 +15,12 @@
       padding: 2rem 1rem;
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
+    header { text-align: center; margin-bottom: 2.5rem; }
+    header h1 { font-size: 2rem; font-weight: 700; color: #4caf50; letter-spacing: -0.5px; }
+    header p { color: #66bb6a; font-size: 0.9rem; margin-top: 0.25rem; }
 
-    header h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #4caf50;
-      letter-spacing: -0.5px;
-    }
+    .container { max-width: 680px; margin: 0 auto; }
 
-    header p {
-      color: #66bb6a;
-      font-size: 0.9rem;
-      margin-top: 0.25rem;
-    }
-
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    /* Form */
     .form-card {
       background: #1a2e1e;
       border: 1px solid #2e5234;
@@ -46,23 +28,12 @@
       padding: 1.5rem;
       margin-bottom: 2rem;
     }
-
     .form-card h2 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #81c784;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-size: 1rem; font-weight: 600; color: #81c784;
+      margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px;
     }
-
-    .form-row {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .form-row input {
+    .form-row { display: flex; flex-direction: column; gap: 0.75rem; }
+    .form-row input, .form-row select {
       background: #0f1f13;
       border: 1px solid #2e5234;
       border-radius: 8px;
@@ -73,343 +44,265 @@
       transition: border-color 0.2s;
       width: 100%;
     }
-
+    .form-row select option { background: #0f1f13; }
     .form-row input::placeholder { color: #4a7050; }
-
-    .form-row input:focus {
+    .form-row input:focus, .form-row select:focus {
       border-color: #4caf50;
-      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+      box-shadow: 0 0 0 3px rgba(76,175,80,0.15);
     }
+    #folder-select-wrapper { display: none; }
 
     .btn-add {
-      background: #4caf50;
-      color: #0f1f13;
-      border: none;
-      border-radius: 8px;
-      padding: 0.7rem 1.2rem;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
+      background: #4caf50; color: #0f1f13; border: none;
+      border-radius: 8px; padding: 0.7rem 1.2rem;
+      font-size: 0.95rem; font-weight: 700; cursor: pointer;
       transition: background 0.2s, transform 0.1s;
-      align-self: flex-end;
-      min-width: 120px;
+      align-self: flex-end; min-width: 120px;
     }
-
     .btn-add:hover { background: #66bb6a; }
     .btn-add:active { transform: scale(0.97); }
 
-    .error-msg {
-      color: #ef9a9a;
-      font-size: 0.82rem;
-      margin-top: 0.25rem;
-      min-height: 1.1em;
-    }
+    .error-msg { color: #ef9a9a; font-size: 0.82rem; margin-top: 0.25rem; min-height: 1.1em; }
 
-    /* Search bar */
-    .search-bar {
-      position: relative;
-      margin-bottom: 1rem;
-    }
-
+    .search-bar { position: relative; margin-bottom: 1rem; }
     .search-bar input {
-      width: 100%;
-      background: #1a2e1e;
-      border: 1px solid #2e5234;
-      border-radius: 8px;
-      padding: 0.65rem 4.6rem 0.65rem 2.4rem;
-      color: #e8f5e9;
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.2s;
+      width: 100%; background: #1a2e1e; border: 1px solid #2e5234;
+      border-radius: 8px; padding: 0.65rem 4.6rem 0.65rem 2.4rem;
+      color: #e8f5e9; font-size: 0.95rem; outline: none; transition: border-color 0.2s;
     }
-
     .search-bar input::placeholder { color: #4a7050; }
-
-    .search-bar input:focus {
-      border-color: #4caf50;
-      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
-    }
-
+    .search-bar input:focus { border-color: #4caf50; box-shadow: 0 0 0 3px rgba(76,175,80,0.15); }
     .search-icon {
-      position: absolute;
-      left: 0.75rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #4a7050;
-      pointer-events: none;
-      font-size: 0.95rem;
+      position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);
+      color: #4a7050; pointer-events: none; font-size: 0.95rem;
     }
-
     .search-clear {
-      position: absolute;
-      right: 0.6rem;
-      top: 50%;
-      transform: translateY(-50%);
-      background: transparent;
-      border: none;
-      color: #4a7050;
-      cursor: pointer;
-      font-size: 1rem;
-      line-height: 1;
-      padding: 0.2rem;
-      display: none;
+      position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%);
+      background: transparent; border: none; color: #4a7050; cursor: pointer;
+      font-size: 1rem; line-height: 1; padding: 0.2rem; display: none;
     }
-
     .search-clear:hover { color: #ef9a9a; }
-
     .search-random {
-      position: absolute;
-      right: 2.2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      background: transparent;
-      border: none;
-      color: #4a7050;
-      cursor: pointer;
-      font-size: 1rem;
-      line-height: 1;
-      padding: 0.2rem;
-      transition: color 0.15s, transform 0.15s;
+      position: absolute; right: 2.2rem; top: 50%; transform: translateY(-50%);
+      background: transparent; border: none; color: #4a7050; cursor: pointer;
+      font-size: 1rem; line-height: 1; padding: 0.2rem; transition: color 0.15s, transform 0.15s;
     }
-
     .search-random:hover { color: #4caf50; transform: translateY(-50%) rotate(20deg); }
 
-    mark {
-      background: rgba(76, 175, 80, 0.3);
-      color: #e8f5e9;
-      border-radius: 2px;
-      padding: 0 1px;
-    }
+    mark { background: rgba(76,175,80,0.3); color: #e8f5e9; border-radius: 2px; padding: 0 1px; }
 
-    /* Counter bar */
     .counter-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1rem;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 0.75rem; gap: 0.5rem;
     }
-
+    .counter-bar-left { display: flex; align-items: center; gap: 0.75rem; }
     .counter-bar h2 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #81c784;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-size: 1rem; font-weight: 600; color: #81c784;
+      text-transform: uppercase; letter-spacing: 0.5px;
     }
-
     .badge {
-      background: #2e5234;
-      color: #a5d6a7;
-      border-radius: 999px;
-      padding: 0.2rem 0.75rem;
-      font-size: 0.82rem;
-      font-weight: 700;
+      background: #2e5234; color: #a5d6a7;
+      border-radius: 999px; padding: 0.2rem 0.75rem;
+      font-size: 0.82rem; font-weight: 700;
     }
 
-    /* Bookmarks list */
-    .bookmarks-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
+    .btn-new-folder {
+      background: transparent; border: 1px solid #2e5234; color: #81c784;
+      border-radius: 8px; padding: 0.3rem 0.75rem; font-size: 0.8rem;
+      cursor: pointer; transition: background 0.2s, border-color 0.2s, color 0.2s;
+      display: flex; align-items: center; gap: 0.3rem; white-space: nowrap;
     }
+    .btn-new-folder:hover { background: rgba(76,175,80,0.1); border-color: #4caf50; color: #4caf50; }
 
+    .new-folder-form {
+      display: none; background: #1a2e1e; border: 1px solid #4caf50;
+      border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 0.75rem;
+      flex-direction: row; gap: 0.5rem; align-items: center;
+    }
+    .new-folder-form.visible { display: flex; }
+    .new-folder-form input {
+      flex: 1; background: #0f1f13; border: 1px solid #2e5234;
+      border-radius: 8px; padding: 0.55rem 0.9rem; color: #e8f5e9;
+      font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+    }
+    .new-folder-form input:focus { border-color: #4caf50; box-shadow: 0 0 0 3px rgba(76,175,80,0.15); }
+    .new-folder-form input::placeholder { color: #4a7050; }
+    .btn-folder-create {
+      background: #4caf50; color: #0f1f13; border: none; border-radius: 8px;
+      padding: 0.55rem 1rem; font-size: 0.88rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s; white-space: nowrap;
+    }
+    .btn-folder-create:hover { background: #66bb6a; }
+    .btn-folder-cancel {
+      background: transparent; border: 1px solid #2e5234; color: #4a7050;
+      border-radius: 8px; padding: 0.55rem 0.75rem; font-size: 0.88rem;
+      cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-folder-cancel:hover { border-color: #ef9a9a; color: #ef9a9a; }
+
+    .bookmarks-list { display: flex; flex-direction: column; gap: 0.6rem; }
+
+    /* Folder sections */
+    .folder-section {
+      border: 1px solid #2e5234; border-radius: 10px; overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .folder-section.drag-over {
+      border-color: #4caf50;
+      box-shadow: 0 0 0 2px rgba(76,175,80,0.25);
+    }
+    .folder-header {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1rem; background: #162b1a;
+      cursor: pointer; user-select: none; transition: background 0.15s;
+    }
+    .folder-header:hover { background: #1e3a22; }
+    .folder-arrow { font-size: 0.6rem; color: #4a7050; width: 10px; flex-shrink: 0; }
+    .folder-icon { font-size: 1rem; }
+    .folder-name { flex: 1; font-weight: 600; font-size: 0.9rem; color: #a5d6a7; }
+    .btn-folder-delete {
+      background: transparent; border: none; color: #4a7050;
+      cursor: pointer; font-size: 0.8rem; padding: 0.2rem 0.4rem;
+      border-radius: 4px; transition: color 0.2s, background 0.2s; flex-shrink: 0;
+    }
+    .btn-folder-delete:hover { color: #ef9a9a; background: rgba(239,154,154,0.1); }
+
+    .folder-body {
+      display: flex; flex-direction: column;
+      background: #1a2e1e; overflow: hidden;
+    }
+    .folder-section.collapsed .folder-body { display: none; }
+
+    .folder-body .bookmark-item {
+      border-radius: 0; border: none; border-top: 1px solid #1e3a22;
+      animation: none;
+    }
+    .folder-body .bookmark-item:first-child { border-top: none; }
+    .folder-body .bookmark-item:hover { transform: none; background: #1e3a22; }
+
+    .folder-empty-drop {
+      padding: 1.25rem; text-align: center; color: #4a7050; font-size: 0.85rem;
+      border: 1.5px dashed #2e5234; border-radius: 8px; margin: 0.75rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .folder-section.drag-over .folder-empty-drop { border-color: #4caf50; color: #81c784; }
+
+    /* Bookmark items */
     .bookmark-item {
-      background: #1a2e1e;
-      border: 1px solid #2e5234;
-      border-radius: 10px;
-      padding: 0.85rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      transition: border-color 0.2s, transform 0.15s;
+      background: #1a2e1e; border: 1px solid #2e5234; border-radius: 10px;
+      padding: 0.85rem 1rem; display: flex; align-items: center; gap: 0.75rem;
+      transition: border-color 0.2s, transform 0.15s, background 0.15s;
       animation: slideIn 0.2s ease;
     }
-
     @keyframes slideIn {
       from { opacity: 0; transform: translateY(-6px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+    .bookmark-item:hover { border-color: #4caf50; transform: translateX(3px); }
+    .bookmark-item.dragging { opacity: 0.35; }
 
-    .bookmark-item:hover {
-      border-color: #4caf50;
-      transform: translateX(3px);
+    .drag-handle {
+      color: #2e5234; cursor: grab; font-size: 1.1rem; flex-shrink: 0;
+      line-height: 1; padding: 0 1px; transition: color 0.15s;
     }
+    .drag-handle:hover { color: #4a7050; }
+    .drag-handle:active { cursor: grabbing; }
 
-    .favicon {
-      width: 20px;
-      height: 20px;
-      border-radius: 4px;
-      flex-shrink: 0;
-      background: #2e5234;
-    }
+    .favicon { width: 20px; height: 20px; border-radius: 4px; flex-shrink: 0; background: #2e5234; }
 
-    .bookmark-info {
-      flex: 1;
-      min-width: 0;
-    }
-
+    .bookmark-info { flex: 1; min-width: 0; }
     .bookmark-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: #e8f5e9;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-weight: 600; font-size: 0.95rem; color: #e8f5e9;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-
     .bookmark-url {
-      font-size: 0.78rem;
-      color: #4caf50;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-decoration: none;
+      font-size: 0.78rem; color: #4caf50;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-decoration: none;
     }
-
     .bookmark-url:hover { text-decoration: underline; }
 
+    .btn-menu {
+      background: transparent; border: 1px solid transparent; color: #4a7050;
+      border-radius: 6px; padding: 0.25rem 0.35rem; font-size: 1.1rem;
+      cursor: pointer; flex-shrink: 0; transition: background 0.2s, border-color 0.2s, color 0.2s;
+      line-height: 1;
+    }
+    .btn-menu:hover { background: rgba(76,175,80,0.1); border-color: #2e5234; color: #81c784; }
+
     .btn-delete {
-      background: transparent;
-      border: 1px solid #2e5234;
-      color: #ef9a9a;
-      border-radius: 6px;
-      padding: 0.3rem 0.6rem;
-      font-size: 0.8rem;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: background 0.2s, border-color 0.2s;
+      background: transparent; border: 1px solid #2e5234; color: #ef9a9a;
+      border-radius: 6px; padding: 0.3rem 0.6rem; font-size: 0.8rem;
+      cursor: pointer; flex-shrink: 0; transition: background 0.2s, border-color 0.2s;
     }
+    .btn-delete:hover { background: rgba(239,154,154,0.1); border-color: #ef9a9a; }
 
-    .btn-delete:hover {
-      background: rgba(239, 154, 154, 0.1);
-      border-color: #ef9a9a;
+    /* Context menu */
+    .bookmark-context-menu {
+      position: fixed; background: #1a2e1e; border: 1px solid #3a6b40;
+      border-radius: 10px; padding: 0.4rem 0; min-width: 210px; z-index: 1000;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.55);
+      animation: menuIn 0.12s ease;
     }
-
-    .empty-state {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: #4a7050;
+    @keyframes menuIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-4px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
     }
+    .context-menu-label {
+      font-size: 0.72rem; color: #4a7050; padding: 0.4rem 0.9rem 0.25rem;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .context-menu-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 0.9rem; font-size: 0.9rem; color: #e8f5e9;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .context-menu-item:hover { background: rgba(76,175,80,0.1); }
+    .context-menu-item.active { color: #4caf50; }
+    .context-menu-item .item-icon { font-size: 0.85rem; width: 18px; text-align: center; flex-shrink: 0; }
+    .context-menu-divider { height: 1px; background: #2e5234; margin: 0.3rem 0; }
 
+    .empty-state { text-align: center; padding: 3rem 1rem; color: #4a7050; }
     .empty-state .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
     .empty-state p { font-size: 0.9rem; }
 
     /* Contact form */
-    .contact-section {
-      margin-top: 3rem;
-      border-top: 1px solid #2e5234;
-      padding-top: 2rem;
-    }
-
+    .contact-section { margin-top: 3rem; border-top: 1px solid #2e5234; padding-top: 2rem; }
     .contact-section h2 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #81c784;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 1rem;
+      font-size: 1rem; font-weight: 600; color: #81c784;
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem;
     }
-
     .contact-form {
-      background: #1a2e1e;
-      border: 1px solid #2e5234;
-      border-radius: 14px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+      background: #1a2e1e; border: 1px solid #2e5234; border-radius: 14px;
+      padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;
     }
-
-    .field-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
+    .field-group { display: flex; flex-direction: column; gap: 0.25rem; }
+    .field-inline { display: flex; align-items: center; gap: 0.75rem; }
+    .field-inline input { flex: 1; }
+    .field-error { font-size: 0.8rem; color: #ef9a9a; min-height: 1em; padding-left: 0.1rem; }
+    .contact-form input.invalid, .contact-form textarea.invalid {
+      border-color: #ef9a9a; box-shadow: 0 0 0 3px rgba(239,154,154,0.12);
     }
-
-    .field-inline {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+    .contact-form input, .contact-form textarea {
+      background: #0f1f13; border: 1px solid #2e5234; border-radius: 8px;
+      padding: 0.65rem 0.9rem; color: #e8f5e9; font-size: 0.95rem;
+      font-family: inherit; outline: none; transition: border-color 0.2s; width: 100%;
     }
-
-    .field-inline input {
-      flex: 1;
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: #4a7050; }
+    .contact-form input:focus, .contact-form textarea:focus {
+      border-color: #4caf50; box-shadow: 0 0 0 3px rgba(76,175,80,0.15);
     }
-
-    .field-error {
-      font-size: 0.8rem;
-      color: #ef9a9a;
-      min-height: 1em;
-      padding-left: 0.1rem;
-    }
-
-    .contact-form input.invalid,
-    .contact-form textarea.invalid {
-      border-color: #ef9a9a;
-      box-shadow: 0 0 0 3px rgba(239, 154, 154, 0.12);
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      background: #0f1f13;
-      border: 1px solid #2e5234;
-      border-radius: 8px;
-      padding: 0.65rem 0.9rem;
-      color: #e8f5e9;
-      font-size: 0.95rem;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.2s;
-      width: 100%;
-    }
-
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder { color: #4a7050; }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: #4caf50;
-      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
-    }
-
-    .contact-form textarea {
-      resize: vertical;
-      min-height: 110px;
-    }
-
+    .contact-form textarea { resize: vertical; min-height: 110px; }
     .contact-form .btn-send {
-      background: #4caf50;
-      color: #0f1f13;
-      border: none;
-      border-radius: 8px;
-      padding: 0.7rem 1.2rem;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      align-self: flex-end;
-      min-width: 130px;
+      background: #4caf50; color: #0f1f13; border: none; border-radius: 8px;
+      padding: 0.7rem 1.2rem; font-size: 0.95rem; font-weight: 700; cursor: pointer;
+      transition: background 0.2s, transform 0.1s; align-self: flex-end; min-width: 130px;
     }
-
     .contact-form .btn-send:hover { background: #66bb6a; }
     .contact-form .btn-send:active { transform: scale(0.97); }
-
-    .contact-success {
-      display: none;
-      text-align: center;
-      padding: 1.5rem;
-      color: #81c784;
-      font-size: 0.95rem;
-    }
-
+    .contact-success { display: none; text-align: center; padding: 1.5rem; color: #81c784; font-size: 0.95rem; }
     .contact-success .icon { font-size: 2rem; margin-bottom: 0.5rem; }
 
-    footer {
-      text-align: center;
-      margin-top: 2.5rem;
-      color: #2e5234;
-      font-size: 0.78rem;
-    }
+    footer { text-align: center; margin-top: 2.5rem; color: #2e5234; font-size: 0.78rem; }
   </style>
 </head>
 <body>
@@ -423,7 +316,12 @@
       <h2>Ajouter un favori</h2>
       <div class="form-row">
         <input type="text" id="input-title" placeholder="Titre du site" autocomplete="off" />
-        <input type="url" id="input-url" placeholder="https://exemple.com" autocomplete="off" />
+        <input type="url"  id="input-url"   placeholder="https://exemple.com" autocomplete="off" />
+        <div id="folder-select-wrapper">
+          <select id="input-folder">
+            <option value="">Sans dossier</option>
+          </select>
+        </div>
         <span class="error-msg" id="error-msg"></span>
         <button class="btn-add" id="btn-add">+ Ajouter</button>
       </div>
@@ -431,14 +329,14 @@
 
     <div class="search-bar">
       <span class="search-icon">
-        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
           <circle cx="6.5" cy="6.5" r="5" stroke="#4a7050" stroke-width="1.5"/>
           <line x1="10.5" y1="10.5" x2="14" y2="14" stroke="#4a7050" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
       </span>
       <input type="search" id="search-input" placeholder="Rechercher un favori…" autocomplete="off" />
       <button class="search-random" id="search-random" title="Favori aléatoire">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
           <rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" stroke-width="1.8"/>
           <circle cx="8" cy="8" r="1.5" fill="currentColor"/>
           <circle cx="16" cy="8" r="1.5" fill="currentColor"/>
@@ -451,8 +349,17 @@
     </div>
 
     <div class="counter-bar">
-      <h2>Mes favoris</h2>
-      <span class="badge" id="counter">0 lien</span>
+      <div class="counter-bar-left">
+        <h2>Mes favoris</h2>
+        <span class="badge" id="counter">0 lien</span>
+      </div>
+      <button class="btn-new-folder" id="btn-new-folder">📁 Nouveau dossier</button>
+    </div>
+
+    <div class="new-folder-form" id="new-folder-form">
+      <input type="text" id="new-folder-input" placeholder="Nom du dossier…" autocomplete="off" maxlength="50" />
+      <button class="btn-folder-create" id="btn-folder-create">Créer</button>
+      <button class="btn-folder-cancel" id="btn-folder-cancel">Annuler</button>
     </div>
 
     <div class="bookmarks-list" id="bookmarks-list"></div>
@@ -484,77 +391,41 @@
 
   <footer>© 2026 Gestionnaire de Favoris</footer>
 
+  <div class="bookmark-context-menu" id="bookmark-context-menu" style="display:none"></div>
+
   <script>
-    const STORAGE_KEY = 'bookmarks_v1';
+    const STORAGE_KEY  = 'bookmarks_v1';
+    const FOLDERS_KEY  = 'folders_v1';
 
+    let draggingIndex  = null;
+    let activeMenuIndex = null;
+    const collapsedFolders = new Set();
+
+    /* ── Storage ── */
     function load() {
-      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-      catch { return []; }
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; }
     }
+    function save(bm) { localStorage.setItem(STORAGE_KEY, JSON.stringify(bm)); }
 
-    function save(bookmarks) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(bookmarks));
+    function loadFolders() {
+      try { return JSON.parse(localStorage.getItem(FOLDERS_KEY)) || []; } catch { return []; }
     }
+    function saveFolders(f) { localStorage.setItem(FOLDERS_KEY, JSON.stringify(f)); }
 
+    /* ── Helpers ── */
     function faviconUrl(url) {
-      try {
-        const { origin } = new URL(url);
-        return `https://www.google.com/s2/favicons?domain=${origin}&sz=32`;
-      } catch { return ''; }
+      try { const { origin } = new URL(url); return `https://www.google.com/s2/favicons?domain=${origin}&sz=32`; }
+      catch { return ''; }
     }
 
-    function highlight(text, query) {
-      if (!query) return escHtml(text);
-      const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      return escHtml(text).replace(new RegExp(escaped, 'gi'), m => `<mark>${m}</mark>`);
+    function escHtml(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
-    function renderList(bookmarks, query = '') {
-      const list = document.getElementById('bookmarks-list');
-      const counter = document.getElementById('counter');
-      const total = bookmarks.length;
-
-      const q = query.trim().toLowerCase();
-      const filtered = q
-        ? bookmarks.filter(b => b.title.toLowerCase().includes(q) || b.url.toLowerCase().includes(q))
-        : bookmarks;
-
-      const n = filtered.length;
-      counter.textContent = q
-        ? `${n} résultat${n !== 1 ? 's' : ''} sur ${total}`
-        : `${total} lien${total !== 1 ? 's' : ''}`;
-
-      if (total === 0) {
-        list.innerHTML = `
-          <div class="empty-state">
-            <div class="icon">🔖</div>
-            <p>Aucun favori pour l'instant.<br>Ajoutez votre premier lien ci-dessus !</p>
-          </div>`;
-        return;
-      }
-
-      if (n === 0) {
-        list.innerHTML = `
-          <div class="empty-state">
-            <div class="icon">🔍</div>
-            <p>Aucun résultat pour « ${escHtml(query.trim())} ».</p>
-          </div>`;
-        return;
-      }
-
-      list.innerHTML = filtered.map((b, i) => `
-        <div class="bookmark-item" data-index="${bookmarks.indexOf(b)}">
-          <img class="favicon" src="${faviconUrl(b.url)}" alt="" onerror="this.style.display='none'" />
-          <div class="bookmark-info">
-            <div class="bookmark-title" title="${escHtml(b.title)}">${highlight(b.title, query.trim())}</div>
-            <a class="bookmark-url" href="${escHtml(b.url)}" target="_blank" rel="noopener noreferrer">${highlight(b.url, query.trim())}</a>
-          </div>
-          <button class="btn-delete" data-index="${bookmarks.indexOf(b)}" title="Supprimer">✕</button>
-        </div>`).join('');
-    }
-
-    function escHtml(str) {
-      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    function highlight(text, q) {
+      if (!q) return escHtml(text);
+      const esc = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+      return escHtml(text).replace(new RegExp(esc,'gi'), m => `<mark>${m}</mark>`);
     }
 
     function normalizeUrl(url) {
@@ -563,105 +434,371 @@
       return url;
     }
 
-    function addBookmark() {
-      const titleInput = document.getElementById('input-title');
-      const urlInput   = document.getElementById('input-url');
-      const errorMsg   = document.getElementById('error-msg');
+    /* ── Folder select in form ── */
+    function updateFolderSelect(folders) {
+      const wrapper = document.getElementById('folder-select-wrapper');
+      const sel = document.getElementById('input-folder');
+      if (!folders.length) { wrapper.style.display = 'none'; return; }
+      wrapper.style.display = 'block';
+      const cur = sel.value;
+      sel.innerHTML = `<option value="">Sans dossier</option>` +
+        folders.map(f => `<option value="${escHtml(f.id)}"${f.id===cur?' selected':''}>${escHtml(f.name)}</option>`).join('');
+    }
 
-      const title = titleInput.value.trim();
-      let url = normalizeUrl(urlInput.value);
+    /* ── Render one bookmark item ── */
+    function renderItem(b, realIndex, query, withDrag) {
+      return `
+        <div class="bookmark-item" data-index="${realIndex}"${withDrag?' draggable="true"':''}>
+          ${withDrag ? '<span class="drag-handle" title="Glisser-déposer">⠿</span>' : ''}
+          <img class="favicon" src="${faviconUrl(b.url)}" alt="" onerror="this.style.display='none'" />
+          <div class="bookmark-info">
+            <div class="bookmark-title" title="${escHtml(b.title)}">${highlight(b.title, query)}</div>
+            <a class="bookmark-url" href="${escHtml(b.url)}" target="_blank" rel="noopener noreferrer">${highlight(b.url, query)}</a>
+          </div>
+          ${withDrag ? `<button class="btn-menu" data-index="${realIndex}" title="Déplacer dans un dossier">⋮</button>` : ''}
+          <button class="btn-delete" data-index="${realIndex}" title="Supprimer">✕</button>
+        </div>`;
+    }
 
-      errorMsg.textContent = '';
+    /* ── Main render ── */
+    function renderList(bookmarks, query) {
+      query = query || '';
+      const list    = document.getElementById('bookmarks-list');
+      const counter = document.getElementById('counter');
+      const folders = loadFolders();
+      const total   = bookmarks.length;
+      const q       = query.trim().toLowerCase();
 
-      if (!title && !url) {
-        errorMsg.textContent = 'Veuillez renseigner un titre et une URL.';
+      updateFolderSelect(folders);
+
+      /* Search view — flat, no drag */
+      if (q) {
+        const filtered = bookmarks.filter(b =>
+          b.title.toLowerCase().includes(q) || b.url.toLowerCase().includes(q));
+        const n = filtered.length;
+        counter.textContent = `${n} résultat${n!==1?'s':''} sur ${total}`;
+        if (total === 0) {
+          list.innerHTML = emptyState('🔖','Aucun favori pour l\'instant.<br>Ajoutez votre premier lien ci-dessus !');
+          return;
+        }
+        if (n === 0) {
+          list.innerHTML = emptyState('🔍',`Aucun résultat pour « ${escHtml(query.trim())} ».`);
+          return;
+        }
+        list.innerHTML = filtered.map(b => renderItem(b, bookmarks.indexOf(b), query.trim(), false)).join('');
         return;
       }
-      if (!title) { errorMsg.textContent = 'Le titre est requis.'; return; }
-      if (!url)   { errorMsg.textContent = "L'URL est requise."; return; }
 
-      try { new URL(url); }
-      catch { errorMsg.textContent = "L'URL semble invalide."; return; }
+      counter.textContent = `${total} lien${total!==1?'s':''}`;
+
+      /* Flat view — no folders created yet */
+      if (folders.length === 0) {
+        if (total === 0) {
+          list.innerHTML = emptyState('🔖','Aucun favori pour l\'instant.<br>Ajoutez votre premier lien ci-dessus !');
+          return;
+        }
+        list.innerHTML = bookmarks.map((b, i) => renderItem(b, i, '', false)).join('');
+        return;
+      }
+
+      /* Folder view */
+      let html = '';
+
+      folders.forEach(folder => {
+        const fb = bookmarks.filter(b => b.folderId === folder.id);
+        const collapsed = collapsedFolders.has(folder.id);
+        html += `
+          <div class="folder-section${collapsed?' collapsed':''}" data-folder-id="${escHtml(folder.id)}">
+            <div class="folder-header" data-toggle="${escHtml(folder.id)}">
+              <span class="folder-arrow">${collapsed?'▶':'▼'}</span>
+              <span class="folder-icon">📁</span>
+              <span class="folder-name">${escHtml(folder.name)}</span>
+              <span class="badge">${fb.length}</span>
+              <button class="btn-folder-delete" data-folder-id="${escHtml(folder.id)}" title="Supprimer le dossier">✕</button>
+            </div>
+            <div class="folder-body">
+              ${fb.length
+                ? fb.map(b => renderItem(b, bookmarks.indexOf(b), '', true)).join('')
+                : '<div class="folder-empty-drop">Déposez des favoris ici</div>'}
+            </div>
+          </div>`;
+      });
+
+      /* Unorganized section */
+      const unorg = bookmarks.filter(b => !b.folderId);
+      const collUnorg = collapsedFolders.has('__unorg__');
+      html += `
+        <div class="folder-section${collUnorg?' collapsed':''}" data-folder-id="">
+          <div class="folder-header" data-toggle="__unorg__">
+            <span class="folder-arrow">${collUnorg?'▶':'▼'}</span>
+            <span class="folder-icon">📌</span>
+            <span class="folder-name">Sans dossier</span>
+            <span class="badge">${unorg.length}</span>
+          </div>
+          <div class="folder-body">
+            ${unorg.length
+              ? unorg.map(b => renderItem(b, bookmarks.indexOf(b), '', true)).join('')
+              : '<div class="folder-empty-drop">Déposez des favoris ici</div>'}
+          </div>
+        </div>`;
+
+      list.innerHTML = html;
+    }
+
+    function emptyState(icon, msg) {
+      return `<div class="empty-state"><div class="icon">${icon}</div><p>${msg}</p></div>`;
+    }
+
+    function currentQuery() { return document.getElementById('search-input').value; }
+
+    /* ── Add bookmark ── */
+    function addBookmark() {
+      const titleInput  = document.getElementById('input-title');
+      const urlInput    = document.getElementById('input-url');
+      const folderSel   = document.getElementById('input-folder');
+      const errorMsg    = document.getElementById('error-msg');
+
+      const title    = titleInput.value.trim();
+      let url        = normalizeUrl(urlInput.value);
+      const folderId = folderSel.value || null;
+
+      errorMsg.textContent = '';
+      if (!title && !url) { errorMsg.textContent = 'Veuillez renseigner un titre et une URL.'; return; }
+      if (!title)          { errorMsg.textContent = 'Le titre est requis.'; return; }
+      if (!url)            { errorMsg.textContent = "L'URL est requise."; return; }
+      try { new URL(url); } catch { errorMsg.textContent = "L'URL semble invalide."; return; }
 
       const bookmarks = load();
-      bookmarks.unshift({ title, url, addedAt: Date.now() });
+      bookmarks.unshift({ title, url, addedAt: Date.now(), folderId });
       save(bookmarks);
-      renderList(bookmarks, document.getElementById('search-input').value);
-
+      renderList(bookmarks, currentQuery());
       titleInput.value = '';
       urlInput.value   = '';
       titleInput.focus();
     }
 
     document.getElementById('btn-add').addEventListener('click', addBookmark);
+    document.getElementById('input-url').addEventListener('keydown',   e => { if (e.key==='Enter') addBookmark(); });
+    document.getElementById('input-title').addEventListener('keydown', e => { if (e.key==='Enter') document.getElementById('input-url').focus(); });
 
-    document.getElementById('input-url').addEventListener('keydown', e => {
-      if (e.key === 'Enter') addBookmark();
-    });
-    document.getElementById('input-title').addEventListener('keydown', e => {
-      if (e.key === 'Enter') document.getElementById('input-url').focus();
-    });
-
-    document.getElementById('bookmarks-list').addEventListener('click', e => {
-      const btn = e.target.closest('.btn-delete');
-      if (!btn) return;
-      const index = parseInt(btn.dataset.index, 10);
-      const bookmarks = load();
-      bookmarks.splice(index, 1);
-      save(bookmarks);
-      renderList(bookmarks, document.getElementById('search-input').value);
-    });
-
+    /* ── Search ── */
     const searchInput = document.getElementById('search-input');
     const searchClear = document.getElementById('search-clear');
 
     searchInput.addEventListener('input', () => {
-      const q = searchInput.value;
-      searchClear.style.display = q ? 'block' : 'none';
-      renderList(load(), q);
+      searchClear.style.display = searchInput.value ? 'block' : 'none';
+      renderList(load(), searchInput.value);
     });
-
     searchClear.addEventListener('click', () => {
       searchInput.value = '';
       searchClear.style.display = 'none';
       searchInput.focus();
       renderList(load());
     });
-
     document.getElementById('search-random').addEventListener('click', () => {
       const all = load();
       if (!all.length) return;
-      const pick = all[Math.floor(Math.random() * all.length)];
-      window.open(pick.url, '_blank', 'noopener');
+      window.open(all[Math.floor(Math.random()*all.length)].url, '_blank', 'noopener');
     });
 
-    renderList(load());
+    /* ── List event delegation ── */
+    const listEl = document.getElementById('bookmarks-list');
 
+    listEl.addEventListener('click', e => {
+      /* Delete bookmark */
+      const del = e.target.closest('.btn-delete');
+      if (del) {
+        const bm = load();
+        bm.splice(parseInt(del.dataset.index, 10), 1);
+        save(bm);
+        renderList(bm, currentQuery());
+        return;
+      }
+
+      /* Folder toggle */
+      const header = e.target.closest('.folder-header');
+      if (header && !e.target.closest('.btn-folder-delete')) {
+        const id = header.dataset.toggle;
+        collapsedFolders.has(id) ? collapsedFolders.delete(id) : collapsedFolders.add(id);
+        renderList(load(), currentQuery());
+        return;
+      }
+
+      /* Delete folder */
+      const delF = e.target.closest('.btn-folder-delete');
+      if (delF) {
+        e.stopPropagation();
+        const fid = delF.dataset.folderId;
+        const folders = loadFolders();
+        const f = folders.find(x => x.id === fid);
+        if (!f) return;
+        if (!confirm(`Supprimer le dossier « ${f.name} » ?\nLes favoris seront déplacés dans « Sans dossier ».`)) return;
+        const bm = load();
+        bm.forEach(b => { if (b.folderId === fid) b.folderId = null; });
+        save(bm);
+        saveFolders(folders.filter(x => x.id !== fid));
+        collapsedFolders.delete(fid);
+        renderList(bm, currentQuery());
+        return;
+      }
+
+      /* Open context menu */
+      const menuBtn = e.target.closest('.btn-menu');
+      if (menuBtn) {
+        openContextMenu(menuBtn, parseInt(menuBtn.dataset.index, 10));
+        return;
+      }
+    });
+
+    /* ── Drag & drop ── */
+    listEl.addEventListener('dragstart', e => {
+      const item = e.target.closest('.bookmark-item');
+      if (!item) return;
+      draggingIndex = parseInt(item.dataset.index, 10);
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(() => item.classList.add('dragging'), 0);
+    });
+
+    listEl.addEventListener('dragend', () => {
+      document.querySelectorAll('.bookmark-item.dragging').forEach(el => el.classList.remove('dragging'));
+      document.querySelectorAll('.folder-section.drag-over').forEach(el => el.classList.remove('drag-over'));
+      draggingIndex = null;
+    });
+
+    listEl.addEventListener('dragover', e => {
+      if (draggingIndex === null) return;
+      const section = e.target.closest('.folder-section');
+      if (!section) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      document.querySelectorAll('.folder-section.drag-over').forEach(el => {
+        if (el !== section) el.classList.remove('drag-over');
+      });
+      section.classList.add('drag-over');
+    });
+
+    listEl.addEventListener('dragleave', e => {
+      const section = e.target.closest('.folder-section');
+      if (section && !section.contains(e.relatedTarget)) section.classList.remove('drag-over');
+    });
+
+    listEl.addEventListener('drop', e => {
+      if (draggingIndex === null) return;
+      const section = e.target.closest('.folder-section');
+      if (!section) return;
+      e.preventDefault();
+      section.classList.remove('drag-over');
+      const newFolderId = section.dataset.folderId || null;
+      const bm = load();
+      const b = bm[draggingIndex];
+      if (!b) return;
+      if ((b.folderId || null) === newFolderId) return;
+      b.folderId = newFolderId;
+      save(bm);
+      draggingIndex = null;
+      renderList(bm, currentQuery());
+    });
+
+    /* ── Context menu ── */
+    const ctxMenu = document.getElementById('bookmark-context-menu');
+
+    function openContextMenu(btn, index) {
+      activeMenuIndex = index;
+      const bm = load();
+      const b  = bm[index];
+      const folders = loadFolders();
+
+      let html = `<div class="context-menu-label">Déplacer dans</div>`;
+      html += `<div class="context-menu-item${!b.folderId?' active':''}" data-target-folder="">
+        <span class="item-icon">${!b.folderId?'✓':'📌'}</span>Sans dossier</div>`;
+      if (folders.length) {
+        html += `<div class="context-menu-divider"></div>`;
+        folders.forEach(f => {
+          const active = b.folderId === f.id;
+          html += `<div class="context-menu-item${active?' active':''}" data-target-folder="${escHtml(f.id)}">
+            <span class="item-icon">${active?'✓':'📁'}</span>${escHtml(f.name)}</div>`;
+        });
+      }
+      ctxMenu.innerHTML = html;
+
+      const r = btn.getBoundingClientRect();
+      const w = 210;
+      let left = Math.max(8, r.right - w);
+      let top  = r.bottom + 6;
+      if (top + 220 > window.innerHeight) top = r.top - 220;
+      ctxMenu.style.left = left + 'px';
+      ctxMenu.style.top  = top  + 'px';
+      ctxMenu.style.display = 'block';
+    }
+
+    ctxMenu.addEventListener('click', e => {
+      const item = e.target.closest('.context-menu-item');
+      if (!item) return;
+      const targetFolder = item.dataset.targetFolder || null;
+      const bm = load();
+      if (activeMenuIndex !== null && bm[activeMenuIndex]) {
+        bm[activeMenuIndex].folderId = targetFolder;
+        save(bm);
+        renderList(bm, currentQuery());
+      }
+      ctxMenu.style.display = 'none';
+      activeMenuIndex = null;
+    });
+
+    document.addEventListener('click', e => {
+      if (!ctxMenu.contains(e.target) && !e.target.closest('.btn-menu')) {
+        ctxMenu.style.display = 'none';
+        activeMenuIndex = null;
+      }
+    });
+
+    /* ── New folder ── */
+    document.getElementById('btn-new-folder').addEventListener('click', () => {
+      document.getElementById('new-folder-form').classList.add('visible');
+      document.getElementById('new-folder-input').focus();
+    });
+
+    document.getElementById('btn-folder-cancel').addEventListener('click', () => {
+      document.getElementById('new-folder-form').classList.remove('visible');
+      document.getElementById('new-folder-input').value = '';
+    });
+
+    function createFolder() {
+      const input = document.getElementById('new-folder-input');
+      const name  = input.value.trim();
+      if (!name) { input.focus(); return; }
+      const folders = loadFolders();
+      folders.push({ id: 'folder_' + Date.now(), name, createdAt: Date.now() });
+      saveFolders(folders);
+      input.value = '';
+      document.getElementById('new-folder-form').classList.remove('visible');
+      renderList(load(), currentQuery());
+    }
+
+    document.getElementById('btn-folder-create').addEventListener('click', createFolder);
+    document.getElementById('new-folder-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter')  createFolder();
+      if (e.key === 'Escape') {
+        document.getElementById('new-folder-form').classList.remove('visible');
+        document.getElementById('new-folder-input').value = '';
+      }
+    });
+
+    /* ── Contact form ── */
     function setFieldError(inputId, errorId, message) {
       const input = document.getElementById(inputId);
       const span  = document.getElementById(errorId);
-      if (message) {
-        input.classList.add('invalid');
-        span.textContent = message;
-      } else {
-        input.classList.remove('invalid');
-        span.textContent = '';
-      }
+      if (message) { input.classList.add('invalid'); span.textContent = message; }
+      else { input.classList.remove('invalid'); span.textContent = ''; }
       return !!message;
     }
 
     function validateContactField(inputId, errorId) {
-      const input = document.getElementById(inputId);
-      input.addEventListener('input', () => validateContactField(inputId, errorId));
-
-      const value = input.value.trim();
-      if (inputId === 'contact-name') {
-        return setFieldError(inputId, errorId, value ? '' : 'Le nom est requis.');
-      }
+      const value = document.getElementById(inputId).value.trim();
+      if (inputId === 'contact-name')  return setFieldError(inputId, errorId, value ? '' : 'Le nom est requis.');
       if (inputId === 'contact-email') {
         if (!value) return setFieldError(inputId, errorId, "L'adresse e-mail est requise.");
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
-          return setFieldError(inputId, errorId, "Format d'e-mail invalide.");
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return setFieldError(inputId, errorId, "Format d'e-mail invalide.");
         return setFieldError(inputId, errorId, '');
       }
       return false;
@@ -669,22 +806,23 @@
 
     ['contact-name', 'contact-email'].forEach(id => {
       const errorId = id === 'contact-name' ? 'error-name' : 'error-email';
-      document.getElementById(id).addEventListener('blur', () => validateContactField(id, errorId));
+      document.getElementById(id).addEventListener('blur',  () => validateContactField(id, errorId));
       document.getElementById(id).addEventListener('input', () => {
-        if (document.getElementById(id).classList.contains('invalid'))
-          validateContactField(id, errorId);
+        if (document.getElementById(id).classList.contains('invalid')) validateContactField(id, errorId);
       });
     });
 
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      const hasErrorName  = validateContactField('contact-name',  'error-name');
-      const hasErrorEmail = validateContactField('contact-email', 'error-email');
-      if (hasErrorName || hasErrorEmail) return;
-
+      const a = validateContactField('contact-name',  'error-name');
+      const b = validateContactField('contact-email', 'error-email');
+      if (a || b) return;
       this.style.display = 'none';
       document.getElementById('contact-success').style.display = 'block';
     });
+
+    /* ── Init ── */
+    renderList(load());
   </script>
 </body>
 </html>
